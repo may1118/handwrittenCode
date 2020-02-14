@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>正方形</title>
+    <style>
+      .square1 {
+        width: 10%;
+        height: 10vw;
+        background-color: red;
+      }
+      .square2 {
+        width: 10%;
+        height: 0;
+        padding-top: 10%;
+        background-color: orange;
+      }
+      .square3 {
+        width: 10%;
+        overflow: hidden;
+        background-color: yellow;
+      }
+      .square3::after {
+        content: '';
+        display: block;
+        margin-top: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="square1"></div>
+    <div class="square2"></div>
+    <div class="square3"></div>
+  </body>
+</html>

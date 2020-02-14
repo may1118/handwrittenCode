@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>三栏布局</title>
+    <style>
+      .outer,
+      .left,
+      .right,
+      .content {
+        height: 100px;
+        margin-bottom: 10px;
+      }
+      .left {
+        width: 200px;
+        background-color: aqua;
+      }
+      .content {
+        background-color: bisque;
+      }
+      .right {
+        width: 200px;
+        background-color: blueviolet;
+      }
+      /* 使用flex布局 */
+      .outer-1 {
+        display: flex;
+      }
+      .outer-1 .left {
+        flex: 0 0 200px;
+      }
+      .outer-1 .right {
+        flex: 0 0 200px;
+      }
+      .outer-1 .content {
+        flex: 1;
+      }
+      /* 使用相对定位 */
+      .outer-2 {
+        position: relative;
+      }
+      .outer-2 .left {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .outer-2 .right {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      .outer-2 .content {
+        margin: 0 200px;
+      }
+      /* 使用float */
+      .outer-3 {
+      }
+      .outer-3 .left {
+        float: left;
+      }
+      .outer-3 .right {
+        float: right;
+      }
+      .outer-3 .content {
+        margin: 0 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer outer-1">
+      <div class="left">left</div>
+      <div class="content">content</div>
+      <div class="right">right</div>
+    </div>
+    <div class="outer outer-2">
+      <div class="left">left</div>
+      <div class="content">content</div>
+      <div class="right">right</div>
+    </div>
+    <div class="outer outer-3">
+      <div class="left">left</div>
+      <div class="right">right</div>
+      <!-- 一定要在最后才OK -->
+      <div class="content">content</div>
+    </div>
+  </body>
+</html>

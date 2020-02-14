@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>水平垂直居中</title>
+    <style>
+      .outer {
+        height: 200px;
+        width: 200px;
+        background: tomato;
+        margin: 10px;
+        float: left;
+        position: relative;
+      }
+      .inner {
+        height: 100px;
+        width: 100px;
+        background: black;
+      }
+      /* 使用position和transform */
+      .inner1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      /* 使用position和margin */
+      .inner2 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        /* 需要知道父元素的宽高 */
+        margin-top: -50px;
+        margin-left: -50px;
+      }
+      /* 使用flex布局 */
+      .outer3 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      /* 使用position和margin */
+      .inner4 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer outer1">
+      <div class="inner inner1"></div>
+    </div>
+    <div class="outer outer2">
+      <div class="inner inner2"></div>
+    </div>
+    <div class="outer outer3">
+      <div class="inner inner3"></div>
+    </div>
+    <div class="outer outer4">
+      <div class="inner inner4"></div>
+    </div>
+  </body>
+</html>

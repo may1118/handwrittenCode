@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>清除浮动</title>
+    <style>
+      .outer {
+        width: 200px;
+        background: tomato;
+        margin: 10px;
+        position: relative;
+      }
+      .inner {
+        height: 100px;
+        width: 100px;
+        background: pink;
+        margin: 10px;
+        float: left;
+      }
+      .outer1::after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+      .outer2 {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer outer1">
+      <div class="inner"></div>
+    </div>
+    <div class="outer outer2">
+      <div class="inner"></div>
+    </div>
+  </body>
+</html>

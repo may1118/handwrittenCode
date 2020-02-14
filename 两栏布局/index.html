@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>两栏布局</title>
+    <style>
+      .outer {
+        height: 100px;
+        margin-bottom: 10px;
+      }
+      .left {
+        width: 200px;
+        height: 100px;
+        background-color: blue;
+      }
+      .right {
+        background-color: red;
+        height: 100px;
+      }
+      /* 使用浮动实现 */
+      .outer-1 {
+      }
+      .outer-1 .left {
+        float: left;
+      }
+      .outer-1 .right {
+        margin-left: 200px;
+      }
+      /* 使用相对定位实现1 */
+      .outer-2 {
+        position: relative;
+      }
+      .outer-2 .left {
+        position: absolute;
+      }
+      .outer-2 .right {
+        margin-left: 200px;
+      }
+      /* 使用相对定位实现2 */
+      .outer-3 {
+        position: relative;
+      }
+      .outer-3 .left {
+      }
+      .outer-3 .right {
+        position: absolute;
+        top: 0;
+        left: 200px;
+        right: 0;
+      }
+      /* 使用flex布局 */
+      .outer-4 {
+        display: flex;
+        flex-direction: row;
+      }
+      .outer-4 .left {
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 200px;
+      }
+      .outer-4 .right {
+        flex: auto; /*1 1 auto*/
+      }
+      /* 使用float */
+      .outer-5 {
+      }
+      .outer-5 .left {
+        float: left;
+      }
+      .outer-5 .right {
+        margin-left: 200px;
+      }
+    </style>
+  </head>
+  <!-- 左右两栏，左边固定，右边自适应 -->
+  <body>
+    <div class="outer outer-1">
+      <div class="left">left</div>
+      <div class="right">right</div>
+    </div>
+    <div class="outer outer-2">
+      <div class="left">left</div>
+      <div class="right">right</div>
+    </div>
+    <div class="outer outer-3">
+      <div class="left">left</div>
+      <div class="right">right</div>
+    </div>
+    <div class="outer outer-4">
+      <div class="left">left</div>
+      <div class="right">right</div>
+    </div>
+    <div class="outer outer-5">
+      <div class="left">left</div>
+      <div class="right">right</div>
+    </div>
+  </body>
+</html>
