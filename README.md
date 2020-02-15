@@ -320,3 +320,35 @@
 
 ## JavaScript部分
 
+### 手写bind\call\apply
+
+1. 手写bind
+
+   ```js
+   Function.prototype.bind = function(context,...bindArgs){
+   	// 函数
+       let func = this;
+       // 需要绑定的this
+       context = context || this;
+       if(typeof func !== 'function'){
+           throw new TypeError('Bind must be a function');
+       }
+       return function(...callArgs){
+           let args = bindArgs.concat(callArgs);
+           if(this instanceof func){
+               return new func(...args);
+           }
+           return func.call(context,...args);
+       }
+   }
+   ```
+
+2. 手写call
+
+   ```js
+   
+   ```
+
+   
+
+1. 手写apply
