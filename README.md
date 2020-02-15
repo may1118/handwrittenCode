@@ -2,6 +2,10 @@
 
 [学习博客](https://juejin.im/post/5c9edb066fb9a05e267026dc)
 
+[TOC]
+
+
+
 ## CSS部分
 
 ### 两栏布局
@@ -346,9 +350,136 @@
 2. 手写call
 
    ```js
-   
+   Function.protptype.call = function(context,...args){
+       let context = context||window;
+       context.func = this;
+       if(typeof context.func !== 'function'){
+           throw new TypeError('call must be called on a function');
+       }
+       let res = context.func(...args);
+       delete context.func;
+       return res;
+   }
    ```
 
-   
+3. 手写apply
 
-1. 手写apply
+   ```js
+   Function.protptype.apply = function(context,args){
+       let context = context || window;
+       context.func = this;
+       if(typeof context.func !== 'function'){
+           throw new TypeError('apply must be called on a function');
+       }
+       let res = context.func(...args);
+       delete context.func;
+       return res;
+   }
+   ```
+
+### 实现一个继承
+
+按照之前在《JavaScript高级程序设计》上看到的内容，知道实现一个继承的方法有很多种，有时间整理、看看
+
+```js
+function Father(name){
+    this.name = name;
+}
+Father.prototype.getName = function(){
+    return this.name;
+}
+
+function Son(name){
+    Father.call(this,name);
+}
+// 第一种实现原型链继承
+Object.setPrototype(Son.prototype,Father.prototype);
+// 第二种实现原型链继承
+Son.prototype = Object.create(Father.prototype);
+Son.constractor = Son;
+```
+
+### 实现一个new
+
+```js
+function _new(func,...args){
+    if(typeof func !== 'function'){
+        throw new TypeError('new must be a function.');
+    }
+    let obj = Object.create(func.prototype);
+    let res = func.call(obj,...args);
+    if(res !== null && (typeof res !== 'function' || typeof res !== 'object') ){
+        return res;
+    }
+    return obj;
+}
+```
+
+### 实现一个instanceof
+
+```js
+function _instanceof(a,b){
+    while(a){
+        if(a.__proto__ === b.prototype)return true;
+        a = a.__proto__;
+    }
+    return false;
+}
+```
+
+### 实现一个jsonp
+
+`jsonp`需要前后端的同学共同实现完成，这里我是用`ajax`的方法完成，`ajax`会通过`dataType`自动在`url`后面封装一个`callback`
+
+```js
+function jsonp(url){
+    $.ajax({
+        url: url,
+        method: 'get',
+        dataType: 'jsonp',
+        success: res => {
+            console.log(res);
+        }
+    })
+}
+```
+
+```js
+// 后台代码
+app.get('/getData',(req,res)=>{
+    let {callback} = req.query;
+    let data  = {
+        code: 0,
+        message: 'jsonp'
+    };
+    res.send(`${callback}(${JSON.stringify(data)})`);
+})
+```
+
+### ajax实现
+
+```js
+function ajax(options){
+    let {method,url,async,params,data,headers,success} = options;
+    method = method || 'GET';
+    if(method === 'GET' && params){
+        url += '?' + (Object.keys(params).map(key=>key+'='+params[key]).join('&'));
+    }
+    let xml = new XMLHttpRequest();
+    xml.open(method,url,async);
+    xml.onreadystatechange = function(){
+        if(xml.readystate === 4){
+            if((xml.state >= 200 && xml.state < 300) || xml.state == 304){
+                success && success(xml.responseText);
+            }
+        }
+    }
+    if(headers){
+        Object.keys(headers).forEach(key=>{
+            xml.setRequestHeader(key,headers[key]);
+        })
+    }
+    method === 'GET' ? xml.send() : xml.send(data);
+}
+```
+
