@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>路由实现</title>
+  </head>
+  <body>
+    <header>
+      <a data-path="home">首页</a>
+      <a data-path="conter">个人中心页</a>
+      <a data-path="help">帮助页</a>
+    </header>
+    <section id="content"></section>
+    <script>
+      let header = document.getElementsByTagName('header')[0];
+      header.addEventListener('click', e => {
+        let nodeName = e.target.nodeName.toLowerCase();
+        if (nodeName === 'a') {
+          let path = e.target.dataset.path;
+          changePage(path);
+          history.pushState({ content: path }, null, path);
+        }
+      });
+      window.addEventListener('popstate', e => {
+        // 监听popstate的状态，然后去通过获取到的内容改变页面
+        let content = e.state && e.state.content;
+        changePage(content);
+      });
+      function changePage(pageContent) {
+        let content = document.getElementById('content');
+        content.innerHTML = pageContent;
+      }
+    </script>
+  </body>
+</html>

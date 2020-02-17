@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>实现一个路由变化</title>
+  </head>
+  <body>
+    <div id="home">首页</div>
+    <div id="conter">个人中心</div>
+    <div id="help">帮助页面</div>
+
+    <section id="content"></section>
+    <script>
+      window.addEventListener('hashchange', e => {
+        let content = document.getElementById('content');
+        content.innerHTML = location.hash;
+      });
+    </script>
+  </body>
+</html>
